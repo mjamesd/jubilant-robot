@@ -1,0 +1,23 @@
+[
+    {
+        "id": 1,
+        "name": "Administrator",
+        "email": "admin@jubilantrobot.tec",
+        "password": "password12345",
+        "isAdmin": true
+    },
+    {
+        "id": 2,
+        "name": "Mark Drummond",
+        "email": "mjamesd@gmail.com",
+        "password": "password0520",
+        "isAdmin": false
+    },
+    {
+        "id": 3,
+        "name": "Brian Walden",
+        "email": "bwaldenator@hotmail.com",
+        "password": "password0219",
+        "isAdmin": false
+    }
+]
