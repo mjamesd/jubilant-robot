@@ -56,9 +56,9 @@ User.init(
         },
         sequelize,
         timestamps: true,
-        freezeTableName: false,
+        tableName: 'users',
         underscored: true,
-        modelName: 'user',
+        modelName: 'User',
     }
 );
 
