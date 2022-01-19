@@ -1,0 +1,150 @@
+/* Variables */
+:root {
+    --purple-light: #724472;
+    --purple-dark: #621d62;
+    --green-very-dark: #09180d;
+    --green-dark: #163a16;
+    --green-light: #1e7f20;
+    --green-very-light: #e4eee4;
+    --green-yellow-light: #afca2f;
+    --green-yellow: #609e15;
+    --yellow-golden: #ad9612;
+}
+
+body {
+    color: var(--green-very-dark) !important;
+    background-color: var(--green-very-light) !important;
+}
+
+nav {
+    background-color: var(--green-light) !important;
+}
+
+.page-footer {
+    background-color: var(--green-light) !important;
+}
+
+.footer-copyright {
+    justify-content: center !important;
+}
+
+.btn, .btn-large, .btn-small {
+    background-color: var(--green-yellow-light) !important;
+}
+
+.btn-floating {
+    background-color: var(--purple-dark) !important;
+}
+
+/* body {
+    margin: 0 15rem;
+}
+
+header#header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header#header h1 {
+    width: 100%;
+}
+
+header#header nav {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+header#header nav a.btn {
+    margin: 0 1rem;
+}
+
+footer#footer {
+    display: flex;
+    justify-content: center;
+} */
+
+header nav .nav-wrapper a.brand-logo {
+    margin-left: 2rem;
+}
+
+header nav .nav-wrapper ul {
+    margin-right: 2rem;
+}
+
+.sidenav-overlay {
+    z-index: 996 !important; /* override Materialize default */
+}
+
+main#main {
+    margin-top: 25px;
+}
+
+main#main article.posts header {
+    font-weight: bold;
+    font-size: x-large;
+}
+
+main#main article.posts ul {
+    padding: 0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    list-style: none;
+}
+
+main#main article.posts ul li a.btn {
+    display: flex;
+    align-items: center;
+    margin: 0 0.5rem;
+}
+
+main#main article.posts aside {
+    margin-left: 5rem;
+}
+
+main#main article aside div.container {
+    display: flex;
+    align-items: center;
+}
+
+main#main article aside div.container div.icon {
+    margin-right: 0.5rem;
+}
+
+main#main article aside div.container div.icon span {
+    padding-top: 1.5rem;
+}
+
+main#main div.dashboard div.row {
+    width: 85%;
+}
+
+main#main div.dashboard div.row div.col {
+    border: 2px solid var(--green-dark);
+    border-radius: 10px;
+    margin: 0 2rem;
+}
+
+main#main div.dashboard div.row div.col h3 a {
+    position: relative !important;
+    right: 0px !important;
+    bottom: 10px !important;
+}
+
+.card .card-image .card-title {
+    background-color: var(--green-dark);
+    border-radius: 10px;
+}
+
+main#main div.dashboard ul.dashboard-ul {
+    display: flex;
+}
+
+
+main#main div.dashboard ul.dashboard-ul li a.btn {
+    display: flex;
+    align-items: center;
+    margin: 0 0.5rem;
+}
