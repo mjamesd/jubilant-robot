@@ -1,0 +1,71 @@
+<h2>My Dashboard</h2>
+
+<div class="dashboard">
+    <div class="row">
+        <div class="col s12 m4 l4">
+            <div class="card">
+                <div class="card-image">
+                    <img src="https://picsum.photos/300?blur=2" />
+                    <span class="card-title">My Info: {{user.name}}</span>
+                    <a class="btn-floating halfway-fab waves-effect waves-light red" href="/users/update/{{user.id}}"><i
+                            class="material-icons-outlined">edit</i></a>
+                </div>
+                <div class="card-stacked">
+                    <div class="card-content">
+                        <p>Number of posts: {{ postsCount }}</p>
+                        <p>Number of comments: {{ commentsCount }}</p>
+                        <p>My email: <a href="mailto:{{user.email}}">{{user.email}}</a></p>
+                    </div>
+                    <div class="card-action">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col s12 m6 l6">
+            <h3>My Posts <a class="btn-floating halfway-fab waves-effect waves-light red" href="/posts/add"><i
+                            class="material-icons-outlined">add</i></a></h3>
+            {{#each posts as |post|}}
+            <div class="container">
+                <h4>{{post.title}}</h4>
+                <p>{{ renderSnippet post.body }}</p>
+                <p><em>created <a href="/posts/view/{{../user.id}}/{{post.id}}">{{format_date post.createdAt}}</a></em>
+                </p>
+                <ul class="dashboard-ul">
+                    <li><a class="btn update waves-effect waves-light" href="/posts/update/{{post.id}}">
+                            <span class="material-icons-outlined">edit_note</span>
+                        </a></li>
+                    <li><a class="btn delete waves-effect waves-light" data-model="post" data-id="{{post.id}}" href="#">
+                            <span class="material-icons-outlined">delete_forever</span>
+                        </a></li>
+                </ul>
+                <hr />
+            </div>
+            {{/each}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12 m12 l6">
+            <h3>My Comments</h3>
+            {{#each comments as |comment|}}
+            <div class="container">
+                <p>{{ renderSnippet comment.body }}</p>
+                <p><em>created <a href="/comments/view/{{../user.id}}/{{comment.id}}">{{format_date comment.createdAt}}</a></em>
+                </p>
+                <ul class="dashboard-ul">
+                    <li><a class="btn viewPost waves-effect waves-light" href="/posts/{{comment.Post.user_id}}/{{comment.post_id}}">
+                            <span class="material-icons-outlined">preview</span>
+                        </a></li>
+                    <li><a class="btn update waves-effect waves-light" href="/comments/update/{{comment.id}}">
+                            <span class="material-icons-outlined">edit_note</span>
+                        </a></li>
+                    <li><a class="btn delete waves-effect waves-light" data-model="comment" data-id="{{comment.id}}" href="#">
+                            <span class="material-icons-outlined">delete_forever</span>
+                        </a></li>
+                </ul>
+                <hr />
+            </div>
+            {{/each}}
+        </div>
+    </div>
+</div>

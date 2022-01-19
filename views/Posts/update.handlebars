@@ -1,0 +1,24 @@
+<div class="container">
+    <h2>Re-Press Words</h2>
+    <div class="row">
+        <form id="posts-update" class="col s12">
+            <input type="hidden" id="post-id" value="{{post.id}}" />
+            <input type="hidden" id="post-user_id" value="{{post.user_id}}" />
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="post-title" type="text" value="{{post.title}}" />
+                    <label for="post-title">Title</label>
+                </div>
+                <div class="input-field col s12">
+                    <textarea id="post-body" class="materialize-textarea">{{post.body}}</textarea>
+                    <label for="post-body">What's on your mind?</label>
+                </div>
+                <div class="input-field col s12">
+                    <button class="btn waves-effect waves-light" type="submit">Re-Press My Words
+                        <i class="material-icons-outlined right">send</i>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
