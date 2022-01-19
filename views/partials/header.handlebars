@@ -1,0 +1,26 @@
+<div class="navbar-fixed">
+    <nav>
+        <div class="nav-wrapper">
+            <a href="/" class="brand-logo"><span class="material-icons-outlined">auto_stories</span> Pressed Words</a>
+            <a href="#" data-target="mobile-nav" class="sidenav-trigger"><i
+                    class="material-icons-outlined">menu</i></a>
+            <ul class="right hide-on-med-and-down">
+                {{#if sesh.logged_in}}
+                <li><a href="/dashboard">my dashboard</a></li>
+                <li><a id="logout" href="#">logout</a></li>
+                {{else}}
+                <li><a href="/login">login</a></li>
+                {{/if}}
+            </ul>
+        </div>
+    </nav>
+
+    <ul class="sidenav" id="mobile-nav">
+        {{#if sesh.logged_in}}
+        <li><a href="/dashboard">my dashboard</a></li>
+        <li><a href="/logout">logout</a></li>
+        {{else}}
+        <li><a href="/login">login</a></li>
+        {{/if}}
+    </ul>
+</div>

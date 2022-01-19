@@ -4,10 +4,10 @@
             <header>{{post.title}}</header>
             <ul>
                 {{#if (is_mine post.User.id ../sesh.user_id)}}
-                <li><a class="btn update" href="/posts/update/{{post.id}}">
+                <li><a class="btn update" data-id="post-{{post.id}}" href="/posts/update/{{post.id}}">
                     <span class="material-icons-outlined">edit_note</span>
                 </a></li>
-                <li><a class="btn delete" data-model="post" data-id="{{post.id}}" href="#">
+                <li><a class="btn delete" data-id="post-{{post.id}}" href="#">
                     <span class="material-icons-outlined">delete_forever</span>
                 </a></li>
                 {{/if}}
@@ -25,10 +25,10 @@
                     <div>
                         <ul>
                             {{#if (is_mine comment.User.id ../../sesh.user_id)}}
-                            <li><a class="btn update" href="/comments/update/{{comment.id}}">
+                            <li><a class="btn update" data-id="comment-{{comment.id}}" href="/comments/update/{{comment.id}}">
                                 <span class="material-icons-outlined">edit_note</span>
                             </a></li>
-                            <li><a class="btn delete" data-model="comment" data-id="{{comment.id}}" href="#">
+                            <li><a class="btn delete" data-id="comment-{{comment.id}}" href="#">
                                 <span class="material-icons-outlined">delete_forever</span>
                             </a></li>
                             {{/if}}
