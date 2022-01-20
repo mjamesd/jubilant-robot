@@ -1,32 +1,40 @@
 const router = require('express').Router();
-const { Post, Comment, User } = require('../../models');
+const { Comment } = require('../../models');
 const withAuth = require('../../utils/auth');
 const aaLogo = require('asciiart-logo');
-const Sequelize = require('sequelize');
-const Op = Sequelize.Op;
 
 // Routes available at ~/api/comments/
 
-/* Create
- * @params req.body = {
+/** Create
+ * @param req.body = {
  *      user_id,
- *      post_id,
- *      title,
  *      body
  * }
 **/
-router.get('/', withAuth, async (req, res) => {
+router.post('/add', withAuth, async (req, res) => {
     try {
-        const comment = await Comment.create(...req.body);
-        req.session.save( () => {
-            req.session.message = `Comment id '${comment.id}' has been created.`;
+        if ( (req.session.user_id == req.body.user_id) || req.session.is_admin === true) {
+            const comment = await Comment.create(req.body);
+            req.session.save( () => {
+                req.session.message = `Comment id '${comment.id}' has been created.`;
+                req.session.comment_id = comment.id;
+                res
+                    .status(200)
+                    .json({ commentId: comment.id });
+            });
+        } else {
+            console.log(aaLogo({
+                name: `You cannot create this Comment. Contact an administrator.`,
+                textColor: `bold-white`,
+                borderColor: `red`,
+            }).render());
             res
-                .status(201)
-                .json({ ok: comment });
-        });
+                .status(400)
+                .json(err);
+        }
     } catch (err) {
         console.log(aaLogo({
-            name: `Error while creating your Comment.`,
+            name: `Error while creating your comment.`,
             textColor: `bold-white`,
             borderColor: `red`,
         }).render());
@@ -36,21 +44,41 @@ router.get('/', withAuth, async (req, res) => {
     }
 });
 
-
-
-// Update
-router.put('/:id', withAuth, async (req, res) => {
+/** Update
+ * @param req.body = {
+        id,
+ *      user_id,
+ *      body
+ * }
+**/
+router.put('/update/:comment_id', withAuth, async (req, res) => {
     try {
-        const comment = await Comment.update(...req.body, { where: { id: req.params.id } });
-        req.session.save( () => {
-            req.session.message = `Comment id '${req.params.id}' has been updated.`;
+        let comment = await Comment.findByPk(req.params.comment_id);
+        try {
+            if ( ( (comment.id == req.params.comment_id) && (req.session.user_id == comment.user_id) ) || req.session.is_admin === true) {
+                comment = await Comment.update(req.body, { where: { id: comment.id } });
+                req.session.save( () => {
+                    req.session.message = `Comment id '${comment.id}' has been updated.`;
+                    res
+                        .status(200)
+                        .json({ commentId: comment.id });
+                });
+            } else {
+                throw err;
+            }
+        } catch (err) {
+            console.log(aaLogo({
+                name: `You cannot update Comment with id '${comment.id}'. Contact an administrator.`,
+                textColor: `bold-white`,
+                borderColor: `red`,
+            }).render());
             res
-                .status(201)
-                .json({ ok: comment });
-        });
+                .status(401)
+                .json(err);
+        }
     } catch (err) {
         console.log(aaLogo({
-            name: `Error while updating your Comment with id '${req.params.id}'.`,
+            name: `Error while updating your comment with id '${req.body.id}'.`,
             textColor: `bold-white`,
             borderColor: `red`,
         }).render());
@@ -60,19 +88,35 @@ router.put('/:id', withAuth, async (req, res) => {
     }
 });
 
-// Delete
-router.delete('/:id', withAuth, async (req, res) => {
+/** Delete
+ * @param req.params = {
+ *      id
+ * }
+**/
+router.delete('/delete/:id', withAuth, async (req, res) => {
     try {
-        const comment = await Comment.destroy({ where: { id: req.params.id } });
-        req.session.save( () => {
-            req.session.message = `Comment id '${req.params.id}' has been deleted.`;
+        const comment = await Comment.findByPk(req.params.id);
+        if ( (req.session.user_id === comment.user_id) || req.session.is_admin === true) {
+            await Comment.destroy({ where: { id: comment.id } });
+            req.session.save( () => {
+                req.session.message = `Comment id '${comment.id}' has been deleted.`;
+                res
+                    .status(201)
+                    .json({ comment: comment });
+            });
+        } else {
+            console.log(aaLogo({
+                name: `You cannot delete Comment with id '${comment.id}'. Contact an administrator.`,
+                textColor: `bold-white`,
+                borderColor: `red`,
+            }).render());
             res
-                .status(201)
-                .json({ ok: comment });
-        });
+                .status(404)
+                .json(err);
+        }
     } catch (err) {
         console.log(aaLogo({
-            name: `Error while deleting your Comment with id '${req.params.id}'.`,
+            name: `Error while deleting your comment with id '${req.params.id}'.`,
             textColor: `bold-white`,
             borderColor: `red`,
         }).render());

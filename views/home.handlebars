@@ -16,7 +16,16 @@
                 </li>
             </ul>
             <main>
-                {{{ post.body }}}
+                <div>
+                    {{{ post.body }}}
+                </div>
+                {{#if ../sesh.logged_in }}
+                <ul class="action">
+                    <li><a class="btn" href="/comments/add/{{post.id}}">
+                        <span class="material-icons-outlined">maps_ugc</span>
+                    </a></li>
+                </ul>
+                {{/if}}
             </main>
             <aside>
                 {{#each post.Comments as |comment|}}

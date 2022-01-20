@@ -2,8 +2,6 @@ const router = require('express').Router();
 const { Post, Comment, User } = require('../models');
 const withAuth = require('../utils/auth');
 const aaLogo = require('asciiart-logo');
-const Sequelize = require('sequelize');
-const Op = Sequelize.Op;
 
 router.get('/', async (req, res) => {
     try {
@@ -31,8 +29,6 @@ router.get('/', async (req, res) => {
             ],
         });
         const posts = postData.map((i) => i.get({ plain: true }));
-        console.log(posts);
-        console.log(req.session);
         res.render('home', { posts: posts, sesh: req.session });
     } catch (err) {
         res
@@ -47,7 +43,7 @@ router.get('/login', async (req, res) => {
         return;
       }
     
-      res.render('Users/login');
+      res.render('Users/login', { includeUserJs: true });
 });
 
 router.get('/dashboard', withAuth, async (req, res) => {

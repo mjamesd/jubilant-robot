@@ -1,0 +1,25 @@
+<div class="container comments">
+    {{#each comments as |comment|}}
+        <article id="comment-{{comment.id}}" class="comments">
+            <ul>
+                {{#if (is_mine comment.User.id ../sesh.user_id)}}
+                <li><a class="btn update" href="/comments/update/{{comment.id}}">
+                    <span class="material-icons-outlined">edit_note</span>
+                </a></li>
+                <li><a class="btn delete" data-model="comment" data-id="{{comment.id}}" href="#">
+                    <span class="material-icons-outlined">delete_forever</span>
+                </a></li>
+                {{/if}}
+                <li>
+                    <a href="/users/profile/{{comment.User.id}}">{{comment.User.name}}</a>&nbsp;|&nbsp;<em>created <a href="/comments/view/{{comment.User.id}}/{{comment.id}}">{{format_date comment.createdAt}}</a></em>
+                </li>
+            </ul>
+            <main>
+                {{{ comment.body }}}
+            </main>
+        </article>
+        <br />
+        <hr />
+        <br />
+    {{/each}}
+</div>

@@ -1,9 +1,7 @@
 const router = require('express').Router();
-const { Post, Comment, User } = require('../../models');
+const { User } = require('../../models');
 const withAuth = require('../../utils/auth');
 const aaLogo = require('asciiart-logo');
-const Sequelize = require('sequelize');
-const Op = Sequelize.Op;
 
 // Routes available at ~/api/users/
 
@@ -15,14 +13,14 @@ const Op = Sequelize.Op;
  *      isAdmin
  * }
 **/
-router.post('/', async (req, res) => {
+router.post('/add', async (req, res) => {
     try {
-        const userData = await User.create(...req.body);
+        const userData = await User.create(req.body);
 
         req.session.save(() => {
             req.session.user_id = userData.id;
-            req.session.logged_in = true;
             req.session.isAdmin = userData.isAdmin;
+            req.session.logged_in = true;
 
             res.status(200).json(userData);
         });

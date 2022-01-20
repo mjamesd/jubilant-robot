@@ -1,0 +1,52 @@
+<div class="container posts">
+    {{#each posts as |post|}}
+        <article id="post-{{post.id}}" class="posts">
+            <header>{{post.title}}</header>
+            <ul>
+                {{#if (is_mine post.User.id ../sesh.user_id)}}
+                <li><a class="btn update" data-id="post-{{post.id}}" href="/posts/update/{{post.id}}">
+                    <span class="material-icons-outlined">edit_note</span>
+                </a></li>
+                <li><a class="btn delete" data-id="post-{{post.id}}" href="#">
+                    <span class="material-icons-outlined">delete_forever</span>
+                </a></li>
+                {{/if}}
+                <li>
+                    <a href="/users/profile/{{post.User.id}}">{{post.User.name}}</a>&nbsp;|&nbsp;<em>created <a href="/posts/view/{{post.User.id}}/{{post.id}}">{{format_date post.createdAt}}</a></em>
+                </li>
+            </ul>
+            <main>
+                {{{ post.body }}}
+            </main>
+            <aside>
+                {{#each post.Comments as |comment|}}
+                <div class="container comments" id="comment-{{comment.id}}">
+                    <div class="icon"><span class="material-icons-outlined">sms</span></div>
+                    <div>
+                        <ul>
+                            {{#if (is_mine comment.User.id ../../sesh.user_id)}}
+                            <li><a class="btn update" data-id="comment-{{comment.id}}" href="/comments/update/{{comment.id}}">
+                                <span class="material-icons-outlined">edit_note</span>
+                            </a></li>
+                            <li><a class="btn delete" data-id="comment-{{comment.id}}" href="#">
+                                <span class="material-icons-outlined">delete_forever</span>
+                            </a></li>
+                            {{/if}}
+                            <li>
+                                <a href="/users/profile/{{comment.User.id}}">{{comment.User.name}}</a>&nbsp;|&nbsp;<em>created <a href="/comments/view/{{comment.User.id}}/{{comment.id}}">{{format_date comment.createdAt}}</a></em>
+                            </li>
+                        </ul>
+                        <div class="comment-body">
+                            {{{ comment.body }}}
+                        </div>
+                    </div>
+                </div>
+                <br />
+                {{/each}}
+            </aside>
+        </article>
+        <br />
+        <hr />
+        <br />
+    {{/each}}
+</div>

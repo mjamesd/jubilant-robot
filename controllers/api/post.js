@@ -2,8 +2,6 @@ const router = require('express').Router();
 const { Post } = require('../../models');
 const withAuth = require('../../utils/auth');
 const aaLogo = require('asciiart-logo');
-const Sequelize = require('sequelize');
-const Op = Sequelize.Op;
 
 // Routes available at ~/api/posts/
 
@@ -19,7 +17,7 @@ router.post('/add', withAuth, async (req, res) => {
         if ( (req.session.user_id == req.body.user_id) || req.session.is_admin === true) {
             const post = await Post.create(req.body);
             req.session.save( () => {
-                req.session.message = `Post id '${post.id}' has been created.`;
+                req.session.message = `Post id '${post.id}' hs been created.`;
                 req.session.post_id = post.id;
                 res
                     .status(200)
@@ -58,22 +56,26 @@ router.post('/add', withAuth, async (req, res) => {
 router.put('/update/:post_id', withAuth, async (req, res) => {
     try {
         let post = await Post.findByPk(req.params.post_id);
-        if ( (req.session.user_id == post.user_id == req.params.post_id) || req.session.is_admin === true) {
-            post = await Post.update(req.body, { where: { id: post.id } });
-            req.session.save( () => {
-                req.session.message = `Post id '${post.id}' has been updated.`;
-                res
-                    .status(200)
-                    .json({ postId: post.id });
-            });
-        } else {
+        try {
+            if ( ( (post.id == req.params.post_id) && (req.session.user_id == post.user_id) ) || req.session.is_admin === true) {
+                post = await Post.update(req.body, { where: { id: post.id } });
+                req.session.save( () => {
+                    req.session.message = `Post id '${post.id}' has been updated.`;
+                    res
+                        .status(200)
+                        .json({ postId: post.id });
+                });
+            } else {
+                throw err;
+            }
+        } catch (err) {
             console.log(aaLogo({
                 name: `You cannot update Post with id '${post.id}'. Contact an administrator.`,
                 textColor: `bold-white`,
                 borderColor: `red`,
             }).render());
             res
-                .status(400)
+                .status(401)
                 .json(err);
         }
     } catch (err) {

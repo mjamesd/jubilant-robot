@@ -1,6 +1,5 @@
 
 const handleDelete = async (el) => {
-    // console.log($(el.currentTarget).attr("data-model"));
     const model = $(el.currentTarget).attr("data-model");
     const modelProper = model.substr(0,1).toUpperCase() + model.slice(1);
     const id = $(el.currentTarget).attr("data-id");
@@ -21,7 +20,6 @@ const handleDelete = async (el) => {
 $(document).ready(() => {
     // Initialize Materialize JS components
     $('.sidenav').sidenav();
-    // $('textarea#body').characterCounter();
     M.updateTextFields();
     $(".delete").click(handleDelete);
 });

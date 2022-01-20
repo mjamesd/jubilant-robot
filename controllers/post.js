@@ -2,8 +2,6 @@ const router = require('express').Router();
 const { Post, Comment, User } = require('../models');
 const withAuth = require('../utils/auth');
 const aaLogo = require('asciiart-logo');
-const Sequelize = require('sequelize');
-const Op = Sequelize.Op;
 
 // Routes available at ~/posts/
 
@@ -93,7 +91,7 @@ router.get('/', async (req, res) => {
 
 // Read All from User 
 // @param req.params.user_id
-router.get('/:user_id', withAuth, async (req, res) => {
+router.get('/view/:user_id', withAuth, async (req, res) => {
     try {
         console.log(aaLogo({ name: `Posts` }).render());
         const postData = await Post.findAll({
@@ -140,7 +138,7 @@ router.get('/:user_id', withAuth, async (req, res) => {
 
 // Read One from User
 // @params 
-router.get('/:user_id/:post_id', withAuth, async (req, res) => {
+router.get('/view/:user_id/:post_id', withAuth, async (req, res) => {
     try {
         console.log(aaLogo({ name: `Posts` }).render());
         const postData = await Post.findAll({

@@ -1,40 +1,84 @@
-<div class="row justify-space-between-md">
-  <div class="login-card">
-    <h2 class="page-title">Login</h2>
-    <form class="form login-form">
-      <div class="form-group">
-        <label for="email-login">Email:</label>
-        <input class="form-input" type="text" id="email-login" />
+<div class="container">
+  {{!-- LOGIN FORM --}}
+  <div class="row">
+    <form id="users-login" class="col s12 m6 l6">
+      <div class="row">
+        <div class="col s11 right">
+          <h2>Login</h2>
+        </div>
       </div>
-      <div class="form-group">
-        <label for="password-login">Password:</label>
-        <input class="form-input" type="password" id="password-login" />
+      <div class="row">
+        <div class="input-field col s12">
+          <i class="material-icons-outlined prefix">account_circle</i>
+          <input autocomplete="username" id="email-login" type="email" class="validate" />
+          <label for="email-login">Email Address</label>
+          <span class="helper-text" data-error="Must be an email address" data-success="OK">Enter the email address you
+            signed up with</span>
+        </div>
       </div>
-      <div class="form-group">
-        <button class="btn btn-primary" type="submit">login</button>
+      <div class="row">
+        <div class="input-field col s12">
+          <i class="material-icons-outlined prefix">lock</i>
+          <input autocomplete="current-password" id="password-login" type="password" />
+          <label for="password-login">Password</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s11 right">
+          <button class="btn waves-effect waves-light" type="submit">Log In
+            <i class="material-icons-outlined right">key</i>
+          </button>
+        </div>
       </div>
     </form>
-  </div>
-  <div class="login-card">
-    <h2 class="page-title">Signup</h2>
-    <form class="form signup-form">
-      <div class="form-group">
-        <label for="username-signup">Username:</label>
-        <input class="form-input" type="text" id="username-signup" />
+
+    {{!-- SIGN UP FORM --}}
+
+    <form id="users-add" class="col s12 m5 l5 right">
+      <div class="row">
+        <div class="col s11 right">
+          <h4>Haven't pressed your words before? Sign up today!</h4>
+        </div>
       </div>
-      <div class="form-group">
-        <label for="email-signup">Email:</label>
-        <input class="form-input" type="text" id="email-signup" />
+      <div class="row">
+        <div class="input-field col s12">
+          <i class="material-icons-outlined prefix">badge</i>
+          <input id="name-signup" type="text" min="2" />
+          <label for="name-signup">Your Name</label>
+        </div>
       </div>
-      <div class="form-group">
-        <label for="password-signup">Password:</label>
-        <input class="form-input" type="password" id="password-signup" />
+      <div class="row">
+        <div class="input-field col s12">
+          <i class="material-icons-outlined prefix">account_circle</i>
+          <input autocomplete="username" id="email-signup" type="email" class="validate" />
+          <label for="email-signup">Email Address</label>
+          <span class="helper-text" data-error="Must be an email address" data-success="OK">Enter your email
+            address</span>
+        </div>
       </div>
-      <div class="form-group">
-        <button class="btn btn-primary" type="submit">signup</button>
+      <div class="row">
+        <div class="input-field col s12">
+          <i class="material-icons-outlined prefix">lock</i>
+          <input autocomplete="new-password" id="password-signup" type="password" />
+          <label for="password-signup">Enter a Password</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <i class="material-icons-outlined prefix">lock</i>
+          <input autocomplete="new-password" id="password2-signup" type="password" />
+          <label for="password2-signup">Re-enter Your Password</label>
+          <span class="helper-text" id="passwordNotMatch">Passwords do not match</span>
+          
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s11 right">
+          <button class="btn btn-purplebg waves-effect waves-light" type="submit">Sign Up
+            <i class="material-icons-outlined right">person_add</i>
+          </button>
+        </div>
       </div>
     </form>
   </div>
 </div>
-
-<script src="./js/login.js"></script>

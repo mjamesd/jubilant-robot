@@ -1,0 +1,33 @@
+<div class="container">
+    <h2>Comment on These Pressed Words</h2>
+    <div class="row with-border">
+        <div class="col s3">
+            <p>Words by <a href="/users/profile/{{post.user_id}}">{{post.[User.name]}}</a></p>
+            <p><em>created <a href="/posts/view/{{post.user_id}}/{{post.id}}">{{format_date post.createdAt}}</a></em></p>
+        </div>
+        <div class="col s7">
+            <p>{{ post.body }}</p>
+        </div>
+    </div>
+    <div class="row">
+        <form id="comments-add" class="col s12">
+            <input type="hidden" id="post-user_id" value="{{post.user_id}}" />
+            <input type="hidden" id="post_id" value="{{post.id}}" />
+            <input type="hidden" id="user_id" value="{{sesh.user_id}}" />
+            <div class="row">
+                <div class="input-field col s12">
+                    <textarea id="body" class="materialize-textarea"></textarea>
+                    <label for="body">What's on your mind?</label>
+                    <span class="helper-text">HTML is allowed</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <button class="btn waves-effect waves-light" type="submit">Comment
+                        <i class="material-icons-outlined right">send</i>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

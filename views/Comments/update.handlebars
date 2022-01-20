@@ -1,0 +1,24 @@
+<div class="container">
+    <h2>Re-Press Comment on These Pressed Words</h2>
+    <div class="row">
+        <form id="comments-update" class="col s12">
+            <input type="hidden" id="comment-id" value="{{comment.id}}" />
+            <input type="hidden" id="comment-post_id" value="{{comment.post_id}}" />
+            <input type="hidden" id="comment-user_id" value="{{comment.user_id}}" />
+            <div class="row">
+                <div class="input-field col s12">
+                    <textarea id="comment-body" class="materialize-textarea">{{comment.body}}</textarea>
+                    <label for="comment-body">What's on your mind?</label>
+                    <span class="helper-text">HTML is allowed</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <button class="btn waves-effect waves-light" type="submit">Re-Press My Comment
+                        <i class="material-icons-outlined right">send</i>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

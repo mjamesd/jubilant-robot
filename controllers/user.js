@@ -2,48 +2,28 @@ const router = require('express').Router();
 const { Post, Comment, User } = require('../models');
 const withAuth = require('../utils/auth');
 const aaLogo = require('asciiart-logo');
-const Sequelize = require('sequelize');
-const Op = Sequelize.Op;
 
 // Routes available at ~/users/
 
-// Read All
-// @params ?andUser=true
-// router.get('/', withAuth, async (req, res) => {
-//     try {
-//         const 
-//     } catch (err) {
-
-//     }
-// });
-
-// Read All from User 
-// @params ?andUser=true
-// router.get('/:user', withAuth, async (req, res) => {
-//     try {
-//         const 
-//     } catch (err) {
-
-//     }
-// });
-
-// Read One from User
-// @params ?andUser=true
-// router.get('/:user/:post', withAuth, async (req, res) => {
-//     try {
-//         const 
-//     } catch (err) {
-
-//     }
-// });
-
-// get profile of loggedin user
-router.get('/profile', withAuth, async (req, res) => {
-    res.json(req.session);
-});
 
 // get profile of specific user
-// router.get('/profile/:id', async (req, res) => {});
+router.get('/profile/:user_id', async (req, res) => {
+    const userData = await User.findAll({
+        where: {
+            id: req.params.user_id
+        }
+    });
+    const users = userData.map((i) => i.get({ plain: true }));
+    res
+        .status(200)
+        .render('Users/view', { users: users, sesh: req.session });
+});
+
+router.get('/profile', withAuth, (req, res) => {
+    res
+        .status(200)
+        .redirect(`/users/profile/${req.session.user_id}`);
+});
 
 
 module.exports = router;
