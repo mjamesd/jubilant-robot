@@ -9,6 +9,7 @@
     --green-yellow-light: #afca2f;
     --green-yellow: #609e15;
     --yellow-golden: #ad9612;
+    --error-red: #a70000;
 }
 
 body {
@@ -36,34 +37,20 @@ nav {
     background-color: var(--purple-dark) !important;
 }
 
-/* body {
-    margin: 0 15rem;
+.btn-purplebg {
+    background-color: var(--purple-light) !important;
 }
 
-header#header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.with-border {
+    border: 2px solid var(--green-dark);
+    border-radius: 10px;
+    margin: 0 2rem;
 }
 
-header#header h1 {
-    width: 100%;
+#passwordNotMatch {
+    color: var(--error-red);
+    background-color: var(--green-yellow-light);
 }
-
-header#header nav {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-}
-
-header#header nav a.btn {
-    margin: 0 1rem;
-}
-
-footer#footer {
-    display: flex;
-    justify-content: center;
-} */
 
 header nav .nav-wrapper a.brand-logo {
     margin-left: 2rem;
@@ -86,7 +73,7 @@ main#main article.posts header {
     font-size: x-large;
 }
 
-main#main article.posts ul {
+main#main article.posts ul, main#main article.comments ul {
     padding: 0;
     display: flex;
     justify-content: flex-end;
@@ -94,7 +81,17 @@ main#main article.posts ul {
     list-style: none;
 }
 
-main#main article.posts ul li a.btn {
+main#main article.posts ul.action {
+    justify-content: flex-start;
+}
+
+main#main article.posts ul li a.btn, main#main article.comments ul li a.btn {
+    display: flex;
+    align-items: center;
+    margin: 0 0.5rem;
+}
+
+main#main article.posts main ul.icon li a.btn {
     display: flex;
     align-items: center;
     margin: 0 0.5rem;
@@ -147,4 +144,10 @@ main#main div.dashboard ul.dashboard-ul li a.btn {
     display: flex;
     align-items: center;
     margin: 0 0.5rem;
+}
+
+@media screen and (max-width: 502px) {
+    .brand-logo span {
+        display: none;
+    }
 }

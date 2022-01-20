@@ -1,0 +1,10 @@
+<div class="container users">
+    {{#each users as |user|}}
+    <article id="user-{{user.id}}" class="users">
+        <header><h3>{{user.name}}</h3></header>
+        <main>
+            <a href="mailto:{{user.email}}">Email user</a>
+        </main>
+    </article>
+    {{/each}}
+</div>

@@ -6,6 +6,8 @@ const handleAddPost = async (e) => {
         title: $("#title").val(),
         body: $("#body").val()
     };
+    body.title.replace("<script","<YOU CANNOT DO THIS");
+    body.body.replace("<script","<YOU CANNOT DO THIS");
     const createPost = await fetch(`/api/posts/add`, {
         method: `POST`,
         headers: { 'Content-Type': `application/json` },
