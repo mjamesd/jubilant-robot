@@ -1,6 +1,5 @@
 # My Custom Ignores
 spec
-.env
 package-lock.json
 
 # Logs
@@ -74,7 +73,7 @@ typings/
 .yarn-integrity
 
 # dotenv environment variables file
-.env
+# .env
 .env.test
 
 # parcel-bundler cache (https://parceljs.org/)
