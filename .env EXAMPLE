@@ -1,4 +1,13 @@
-DB_NAME=tech_blog_db
+# MODE accepts two options: "development" or "production". If the former, it will use the local database and localhost.
+MODE=development
+VERSION=0.1
+
+DB_NAME=
 DB_USER=
 DB_PASS=
+
 DB_CONN=
+
+
+TEST_URL=http://localhost
+PROD_URL=
