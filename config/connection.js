@@ -22,12 +22,21 @@ const Sequelize = require('sequelize');
 let sequelize;
 
 if (process.env.MODE === "production") {
-    sequelize = new Sequelize(process.env.DB_CONN);
+    sequelize = new Sequelize(
+        process.env.PROD_DB_NAME,
+        process.env.PROD_DB_USER,
+        process.env.PROD_DB_PASS,
+        {
+            host: process.env.PROD_DB_HOST,
+            dialect: 'mysql',
+            port: 3306
+        }
+    );
 } else if (process.env.MODE === "development") {
     sequelize = new Sequelize(
-        process.env.DB_NAME,
-        process.env.DB_USER,
-        process.env.DB_PASS,
+        process.env.TEST_DB_NAME,
+        process.env.TEST_DB_USER,
+        process.env.TEST_DB_PASS,
         {
             host: 'localhost',
             dialect: 'mysql',
